@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: archlinux_aur_setup
   author: Eliseu Videira
   description: Setup AUR Helper
   license: MIT
