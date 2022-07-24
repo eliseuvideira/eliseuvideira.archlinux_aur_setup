@@ -7,11 +7,11 @@
     else
       echo "Not Installed"
     fi
-  register: check_paru_installed
+  register: archlinux_aur_setup__check_paru_installed
   changed_when: false
 
 - set_fact:
-    is_paru_installed: '{{ check_paru_installed.stdout == "Installed" }}'
+    archlinux_aur_setup__is_paru_installed: '{{ archlinux_aur_setup__check_paru_installed.stdout == "Installed" }}'
 
 - name: Install AUR Helper
   block:
@@ -55,9 +55,9 @@
             cd /opt/paru-bin
             /usr/bin/makepkg -si --noconfirm
 
-      when: is_paru_installed == false
+      when: archlinux_aur_setup__is_paru_installed == false
 
-  when: state == "present"
+  when: archlinux_aur_setup__state == "present"
 
 - name: Uninstall AUR Helper
   block:
@@ -75,5 +75,5 @@
             path: /opt/paru-bin
             state: absent
 
-      when: is_paru_installed == true
-  when: state == "absent"
+      when: archlinux_aur_setup__is_paru_installed == true
+  when: archlinux_aur_setup__state == "absent"
